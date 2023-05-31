@@ -26,18 +26,15 @@ export class SearchReviewComponent implements OnInit {
         })
     }
 
-    invalid(): boolean {
-        return this.form.invalid || this.form.value['movie'].trim().length < 2
-    }
-
-
     searchMovie(query: any) {
         console.info(query)
         const queryParams: Params = { query : query}
         this.utility.searchMovie(query).subscribe({
             next: () => {this.router.navigate(['/view1'], {queryParams})}
-    })
-
+        })
     }
-
+    
+    invalid(): boolean {
+        return this.form.invalid || this.form.value['movie'].trim().length < 2
+    }
 }
