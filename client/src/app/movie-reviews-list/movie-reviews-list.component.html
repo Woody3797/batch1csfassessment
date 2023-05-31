@@ -1,0 +1,35 @@
+<h2>Search Results</h2>
+<div>
+    <button [routerLink]="['/']">Back</button>
+</div>
+<div *ngIf="reviewsObs$ | async as r; else noResult">
+    <div *ngFor="let m of r" style="border: solid darkkhaki; display: flex;">
+        <div *ngIf="m['multimedia.src'] != 'null'; else noImage">
+            <img [src]="m['multimedia.src']" height="150">
+        </div>
+        <div >
+            <span>
+                <a href="{{ m['link.url'] }}">{{ m.display_title }} -- {{ m.mpaa_rating }}</a>
+            </span>
+            <br>
+            {{ m.headline }}
+            <br>
+            {{ m.summary_short }}
+            <br>
+            {{ m.reviewCount }}
+            <br>
+            <button [routerLink]="['/view2', m.display_title]">Comment</button>
+        </div>
+        <div>
+            
+        </div>
+    </div>
+</div>
+
+<ng-template #noResult>Your search produced no result</ng-template>
+<ng-template #noImage>
+    <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png" alt="" height="150">
+    </div>
+</ng-template>
+
